@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HireAndWork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<table style="height:100% ; width:100% " >
+	<tr >
+		<td style="height:15% ; width:100% ; text-align:center ; background-color:#FF9999">
+			<h1> Welcome To " Hire And Work "</h1>
+		</td>
+	</tr>
+
+	<tr>
+		<td style="height:75% ; width:100% ">
+			<table style="height:100% ; width:100% ">
+				<tr>
+					<td style="height:100%; width:10%">
+						
+					</td>
+
+					<td style="height:100% ; width:80%; background-color:silver ; text-align:center">
+						<table>
+							<tr>
+								<td style="width:100%">
+									<% if user_signed_in? %>
+										<%= render "devise/shared/header" %>
+									<% end %>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div><%= notice %></div>
+									<div><%= alert %></div>
+									<%= yield %>
+								</td>
+							</tr>
+						</table>
+						
+					</td>
+
+					<td  style="height:100%; width:10%">
+						
+					</td>
+				</tr>
+			</table>
+		</td>		
+	</tr>
+
+	<tr>
+	<td style="height:10% ; width:100% ; text-align:right; background-color:#FF9999 ">
+			<% if user_signed_in? %>
+				<h3> Logged in as <%= current_user.email %> </h3>
+				<span><%= link_to "LOGOUT" , destroy_user_session_path  , method: :delete %>
+			<% else %>
+				<h3> Not Logged in yet? go For <%= link_to "LogIn" , new_user_session_path %></h3>
+			<% end %>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

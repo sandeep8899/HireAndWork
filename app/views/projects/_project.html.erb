@@ -1,0 +1,31 @@
+<table>
+		<tr>
+			<th> Name : </th>
+			<td>
+				<%= f.text_field :name %>
+			</td>
+		</tr>
+		<tr>
+			<th> Details : </th>
+			<td>
+				<%= f.text_area :details %>
+			</td>
+		</tr>
+		<tr>
+			<th> Skills : </th>
+			<td>
+				<%= f.text_field :skills %>
+			</td>
+		</tr>
+		<tr>
+			<th> Time Period : </th>
+			<td>
+				<%= f.text_field :time_period %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<%= f.submit("Sumbit") %>
+			</td>
+		</tr>
+	</table>

@@ -1,0 +1,22 @@
+<table style="background-color:#919191 ; width:100%" ", border="3">
+	<tr>
+		<td>
+			<%= link_to "Home" , projects_path %>
+		</td>
+		<% if current_user.type=="Client" %>
+			<td>
+				<%= link_to "Add New Project" , new_project_path %>
+			</td>
+			<td>
+				<%= link_to "View All Freelancers" , "#" %>
+			</td>
+		<% else %>
+			<td>
+				<%= link_to "View Profile" , user_detail_path(current_user) %>
+			</td>
+			<td>
+				<%= link_to "View Made Bids" , "#" %>
+			</td>
+		<% end %>
+	</tr>
+</table>

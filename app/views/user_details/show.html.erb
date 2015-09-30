@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<th> <h2> Your Details </h2></th>
+	</tr>
+	<tr>
+		<th> Full Name : <%= @user_detail.name %> </th>
+	</tr>
+	<tr>
+		<th> Qualification : <%= @user_detail.qualification %> </th>
+	</tr>
+	<tr>
+		<th> Skills : <%= @user_detail.skills %> </th>
+	</tr>
+	<tr>
+		<th> Contact No. : <%= @user_detail.contact_number %> </th>
+	</tr>
+	<tr>
+		<th> Specialist In : <%= @user_detail.specialist_in %> </th>
+	</tr>
+	<tr>
+		<th> Experience : <%= @user_detail.experience %> </th>
+	</tr>
+	<tr>
+		<th> <%= link_to "Edit Details" , edit_user_detail_path(@user_detail) %> </th>
+	</tr>
+</table>

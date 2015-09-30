@@ -1,0 +1,3 @@
+<%= form_for @user_detail , url: user_detail_path(@user_detail) , method: :put do |f| %>
+	<%= render partial: "user_detail" , locals: {f: f} %>
+<% end %>

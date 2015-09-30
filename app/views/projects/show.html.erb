@@ -1,0 +1,64 @@
+<table border="2">
+	<tr>
+		<th> Name : </th>
+		<td> <%= @project.name %> </td>
+	</tr>
+	<tr>
+		<th> Details : </th>
+		<td> <%= @project.details %> </td>
+	</tr>
+	<tr>
+		<th> Time Period : </th>
+		<td> <%= @project.time_period %> </td>
+	</tr>
+	<tr>
+		<th> Skill Required : </th>
+		<td> <%= @project.skills %> </td>
+	</tr>
+
+	<% i=0 %>
+	<% @project_bids.each do |bid| %>
+		<tr>
+			<td colspan="2">
+				<%= i=getSrNo(i) %> ... <%= bid.amount %> Rupees
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				By : <%= bid.user.user_detail.name %>
+			</th>
+		</tr>
+	<% end %>
+
+	<% if current_user.type=="Client" %>
+		<tr>
+			<th>
+				<%= link_to "Edit Details", edit_project_path(@project.id) %>
+			</th>
+			<th>
+				<%= link_to "Delete Project", project_path(@project.id) , data: {confirm: "Are you Sure to Delete?" } %>
+			</th>
+		</tr>
+	<% else %>
+		<%= form_for @bid ,url: project_bid_path(@project) , method: :post do |f| %>
+			<tr>
+				<th>
+					Make Your Bid :
+				</th>
+				<td>
+					<%= f.text_field :amount %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<%= f.text_area :message %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<%= f.submit('Make Bid') %>
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
