@@ -1,0 +1,92 @@
+<table border="1">
+	<tr>
+		<th colspan="4">
+			Your Assigned Projects
+		</th>
+	</tr>
+	<tr>
+		<th>
+			Sr. No.
+		</th>
+		<th>
+			Name
+		</th>
+		<th>
+			Skills
+		</th>
+		<th>
+			Actions
+		</th>
+	</tr>
+	<% if @assignedProjects.count == 0 %>
+		<tr>
+			<td> No Record Found ! </td>
+		</tr>
+	<% end %>
+
+	<% i=0 %>
+	<% @assignedProjects.each do |project| %>
+		<tr>
+			<td>
+				<%= i=getSrNo(i) %>
+			</td>
+			<td>
+				<%= project.name %>
+			</td>
+			<td>
+				<%= project.skills %>
+			</td>
+			<td>
+				<%= link_to "view details" , project_path(project.id) %>
+
+				<% if project.status == "Pending" %>
+					<%= link_to "start", start_project_path(project) %>
+				<% elsif project.status == "Running" %>
+					<%= link_to "Complete", complete_project_path(project) %>
+				<% end %>
+
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+<table border="1">
+	<tr>
+		<th colspan="4">
+			Projects You Have Applied For
+		</th>
+	</tr>
+	<tr>
+		<th>
+			Sr. No.
+		</th>
+		<th>
+			Name
+		</th>
+		<th>
+			Skills
+		</th>
+		<th>
+			Actions
+		</th>
+	</tr>
+	<% j=0 %>
+		<% @appliedProjects.each do |project| %>
+			<% if project.project.status == "Pending" %>
+				<tr>
+					<td>
+						<%= j=getSrNo(j) %>
+					</td>
+					<td>
+						<%= project.project.name %>
+					</td>
+					<td>
+						<%= project.project.skills %>
+					</td>
+					<td>
+						<%= link_to "view details" , project_path(project.project.id) %>
+					</td>
+				</tr>
+			<% end %>
+		<% end %>
+</table>

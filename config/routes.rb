@@ -35,7 +35,16 @@ Rails.application.routes.draw do
   #     resource :seller
   #   end
   resources :projects do
-    resource :bid
+    member do
+      get 'apply'
+      get 'viewApplicants'
+      get 'assignProject'
+      get 'start'
+      get 'complete'
+    end
+    collection do
+      get 'myProjects'
+    end
   end
 
   # Example resource route with more complex sub-resources:

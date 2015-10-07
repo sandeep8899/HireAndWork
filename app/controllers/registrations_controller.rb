@@ -25,7 +25,6 @@ class RegistrationsController < Devise::RegistrationsController
 public
 
   def sign_up_params
-  	byebug
     params.require(:user).permit(:email, :password, :password_confirmation , :type)
   end
 

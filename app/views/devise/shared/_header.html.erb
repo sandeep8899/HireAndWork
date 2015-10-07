@@ -8,14 +8,14 @@
 				<%= link_to "Add New Project" , new_project_path %>
 			</td>
 			<td>
-				<%= link_to "View All Freelancers" , "#" %>
+				<%= link_to "View All Users" , user_details_path %>
 			</td>
 		<% else %>
 			<td>
 				<%= link_to "View Profile" , user_detail_path(current_user) %>
 			</td>
 			<td>
-				<%= link_to "View Made Bids" , "#" %>
+				<%= link_to "My Projects("+current_user.projects.where(status: 'Pending').count.to_s+")" , myProjects_projects_path %>
 			</td>
 		<% end %>
 	</tr>

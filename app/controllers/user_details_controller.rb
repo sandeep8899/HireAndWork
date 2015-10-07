@@ -3,7 +3,7 @@ class UserDetailsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-
+		@users=UserDetail.all
 	end
 
 	def new

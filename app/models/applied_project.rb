@@ -1,4 +1,4 @@
-class Bid < ActiveRecord::Base
+class AppliedProject < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :project
 end

@@ -15,20 +15,10 @@
 		<th> Skill Required : </th>
 		<td> <%= @project.skills %> </td>
 	</tr>
-
-	<% i=0 %>
-	<% @project_bids.each do |bid| %>
-		<tr>
-			<td colspan="2">
-				<%= i=getSrNo(i) %> ... <%= bid.amount %> Rupees
-			</td>
-		</tr>
-		<tr>
-			<th colspan="2">
-				By : <%= bid.user.user_detail.name %>
-			</th>
-		</tr>
-	<% end %>
+	<tr>
+		<th> Status : </th>
+		<td> <%= @project.status %> </td>
+	</tr>
 
 	<% if current_user.type=="Client" %>
 		<tr>
@@ -39,25 +29,32 @@
 				<%= link_to "Delete Project", project_path(@project.id) , data: {confirm: "Are you Sure to Delete?" } %>
 			</th>
 		</tr>
-	<% else %>
-		<%= form_for @bid ,url: project_bid_path(@project) , method: :post do |f| %>
+		<% if @project.status == "Pending" %>
+			<% @applicants.each do |applicant| %>
+				<tr>
+					<% user = applicant.user_id %>
+					<th> <%= UserDetail.find(user).name %> </th>
+					<% var = {:id => @project.id , :user_id=>user} %>
+					<th> <%= link_to "assign" , assignProject_project_path(var) %></th>
+				</tr>
+			<% end %>
+		<% else %>
 			<tr>
+				<th> <%= @applicant.user_detail.name %> </th>
 				<th>
-					Make Your Bid :
+					<%= link_to "view" , user_detail_path(@applicant) %>
+					<% if @project.status == "Completed" %>
+						<%= link_to "rate him" , "#" %>
+					<% end %>
 				</th>
-				<td>
-					<%= f.text_field :amount %>
-				</td>
 			</tr>
+		<% end %>
+	<% else %>
+		<% @apply=AppliedProject.where('project_id = ?' , @project) %>
+		<% @new_apply=@apply.where('user_id= ?', current_user.id).limit(1) %>
+		<% if @new_apply.blank? %>
 			<tr>
-				<td colspan="2">
-					<%= f.text_area :message %>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<%= f.submit('Make Bid') %>
-				</td>
+				<td colspan="2"><%= link_to "apply" , apply_project_path(@project.id) %></td>
 			</tr>
 		<% end %>
 	<% end %>

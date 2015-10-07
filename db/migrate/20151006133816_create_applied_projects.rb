@@ -1,10 +1,8 @@
-class CreateBids < ActiveRecord::Migration
+class CreateAppliedProjects < ActiveRecord::Migration
   def change
-    create_table :bids do |t|
-    	t.integer :amount ,  null: false
+    create_table :applied_projects do |t|
     	t.integer :user_id , null: false
     	t.integer :project_id , null: false
-    	t.text :message
       t.timestamps null: false
     end
   end

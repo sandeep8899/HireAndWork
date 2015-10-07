@@ -16,12 +16,9 @@
 			<th>
 				Skill Need
 			</th>
-			<% if current_user.type == "User" %>
+			<% if current_user.type=="Client" %>
 				<th>
-					Time Period
-				</th>
-				<th>
-					Last Bid
+					Status
 				</th>
 			<% end %>
 			<th>
@@ -32,7 +29,7 @@
 		<% @projects.each do |project| %>
 			<tr>
 				<td>
-					<%=i=getSrNo(i) %>
+					<%= i=getSrNo(i) %>
 				</td>
 				<td>
 					<%= project.name %>
@@ -40,20 +37,17 @@
 				<td>
 					<%= project.skills %>
 				</td>
-				<% if current_user.type == "User" %>
+				<% if current_user.type=="Client" %>
 					<td>
-						<%= project.time_period %>
-					</td>
-					<td>
-						<% if project.bids.count > 0 %>
-							<%= project.bids.last.amount %>
-						<% else %>
-							Make First Bid
-						<% end %>
+						<%= project.status %>
 					</td>
 				<% end %>
 				<td>
 					<%= link_to "view details" , project_path(project.id) %>
+
+					<% if current_user.type == "User" %>
+						<%= link_to "apply" , apply_project_path(project.id) %>
+					<% end %>
 				</td>
 			</tr>
 		<% end %>

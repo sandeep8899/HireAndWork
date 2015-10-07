@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
  	has_one :user_detail
+ 	has_many :applied_projects
  	has_many :projects
- 	has_many :bids
 end
